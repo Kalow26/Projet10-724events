@@ -30,6 +30,8 @@ describe("When Form is created", () => {
 describe("When a page is created", () => {
   it("a list of events is displayed", () => {
     render(<EventList />);
+    const events = screen.getByTestId("events");
+    expect(events).toBeInTheDocument();
   });
   it("a list a people is displayed", () => {
     render(<Home />);
@@ -38,8 +40,12 @@ describe("When a page is created", () => {
   });
   it("a footer is displayed", () => {
     render(<Home />);
-    const footer = screen.getByTestId("footer");
+    const footer = screen.getByTestId("footer-testid");
     expect(footer).toBeInTheDocument();
   });
-  it("an event card, with the last event, is displayed", async () => {});
+  it("an event card, with the last event, is displayed", async () => {
+    // render(<Home />);
+    // const footer = screen.getByTestId("footer-testid");
+    // console.log(footer);
+  });
 });

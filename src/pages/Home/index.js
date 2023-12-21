@@ -16,7 +16,9 @@ const Page = () => {
   const { data } = useData();
   // récupération du dernier élément du tableau
   // ajout des id sur les containers pour la navigation
-  const lastEvent = data?.events.slice(-1)[0];
+  const lastEvent = data?.events
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 1)[0];
   return (
     <>
       <header>
@@ -114,7 +116,7 @@ const Page = () => {
           </Modal>
         </div>
       </main>
-      <footer className="row" data-testid="footer">
+      <footer className="row" data-testid="footer-testid">
         <div className="col presta">
           <h3>Notre derniére prestation</h3>
           {/* modification ici pour afficher le dernier élément */}
