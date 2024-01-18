@@ -1,6 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Home from "./index";
 import EventList from "../../containers/Events";
+import EventCard from "../../components/EventCard";
+import { api, DataProvider } from "../../contexts/DataContext";
+import { events } from "../../../public/events.json";
+import { getMonth } from "../../helpers/Date";
+import Page from "./index";
 
 describe("When Form is created", () => {
   it("a list of fields card is displayed", async () => {
@@ -44,8 +49,26 @@ describe("When a page is created", () => {
     expect(footer).toBeInTheDocument();
   });
   it("an event card, with the last event, is displayed", async () => {
-    // render(<Home />);
-    // const footer = screen.getByTestId("footer-testid");
-    // console.log(footer);
+    const lastEvent = events
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 1)[0];
+    const lastEventDate = new Date(lastEvent.date);
+    const mockData = {
+      events: [
+        {
+          imageSrc: lastEvent.cover,
+          title: lastEvent.title,
+          date: lastEventDate,
+          label: "boom",
+        },
+      ],
+    };
+    render(<EventCard {...mockData.events[0]} />);
+    const dateElement = screen.getByTestId("card-date");
+    expect(dateElement).toHaveTextContent("août");
+    // const dateElement = screen
+    //   .getByTestId("footer-testid")
+    //   .querySelector(".EventCard__month");
+    // expect(dateElement).toHaveTextContent("août");
   });
 });
