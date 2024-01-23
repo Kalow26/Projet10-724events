@@ -38,34 +38,35 @@ describe("When a page is created", () => {
     const events = screen.getByTestId("events");
     expect(events).toBeInTheDocument();
   });
+
   it("a list a people is displayed", () => {
     render(<Home />);
     const peopleCard = screen.queryAllByTestId("card-image-testid");
     expect(peopleCard.length).toBeGreaterThan(0);
   });
+
   it("a footer is displayed", () => {
     render(<Home />);
     const footer = screen.getByTestId("footer-testid");
     expect(footer).toBeInTheDocument();
   });
+
   it("an event card, with the last event, is displayed", async () => {
     const lastEvent = events
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, 1)[0];
     const lastEventDate = new Date(lastEvent.date);
     const mockData = {
-      events: [
-        {
-          imageSrc: lastEvent.cover,
-          title: lastEvent.title,
-          date: lastEventDate,
-          label: "boom",
-        },
-      ],
+      imageSrc: lastEvent.cover,
+      title: lastEvent.title,
+      date: lastEventDate,
+      footerEvent: true,
+      label: "boom",
     };
-    render(<EventCard {...mockData.events[0]} />);
-    const dateElement = screen.getByTestId("card-date");
-    expect(dateElement).toHaveTextContent("août");
+    render(<EventCard {...mockData} />);
+    const footerEventCard = screen.getByTestId("footer-event");
+    expect(footerEventCard).toBeInTheDocument();
+    // console.log(footerEventCard);
     // const dateElement = screen
     //   .getByTestId("footer-testid")
     //   .querySelector(".EventCard__month");

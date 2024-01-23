@@ -5,8 +5,9 @@ import "./style.scss";
 export const FIELD_TYPES = {
   INPUT_TEXT: 1,
   TEXTAREA: 2,
+  EMAIL_TEXT: 3,
 };
-// ajout des required pour valider les champs
+// ajout des required pour valider les champs, création d'un field type EMAIL
 const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
   let component;
   switch (type) {
@@ -14,6 +15,17 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
       component = (
         <input
           type="text"
+          name={name}
+          placeholder={placeholder}
+          data-testid="field-testid"
+          required
+        />
+      );
+      break;
+    case FIELD_TYPES.EMAIL_TEXT:
+      component = (
+        <input
+          type="email"
           name={name}
           placeholder={placeholder}
           data-testid="field-testid"

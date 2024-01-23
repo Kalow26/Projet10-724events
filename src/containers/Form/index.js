@@ -40,7 +40,11 @@ const Form = ({ onSuccess, onError }) => {
             type="large"
             titleEmpty
           />
-          <Field placeholder="email" label="Email" />
+          <Field
+            placeholder="email"
+            label="Email"
+            type={FIELD_TYPES.EMAIL_TEXT}
+          />
           <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
             {sending ? "En cours" : "Envoyer"}
           </Button>

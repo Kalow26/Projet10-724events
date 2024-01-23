@@ -127,6 +127,7 @@ const Page = () => {
               date={new Date(lastEvent?.date)}
               small
               label="boom"
+              footerEvent
             />
           )}
         </div>

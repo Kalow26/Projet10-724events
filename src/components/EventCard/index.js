@@ -10,11 +10,14 @@ const EventCard = ({
   title,
   label,
   small = false,
+  footerEvent = false,
   ...props
 }) => (
   <div
-    data-testid="card-testid"
-    className={`EventCard${small ? " EventCard--small" : ""}`}
+    data-testid={`${footerEvent ? "footer-event" : "card-testid"}`}
+    className={`EventCard${small ? " EventCard--small" : ""} ${
+      footerEvent ? "footer-event" : ""
+    }`}
     {...props}
   >
     <div className="EventCard__imageContainer">
@@ -36,12 +39,14 @@ EventCard.propTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
   title: PropTypes.string.isRequired,
   small: PropTypes.bool,
+  footerEvent: PropTypes.bool,
   label: PropTypes.string.isRequired,
 };
 
 EventCard.defaultProps = {
   imageAlt: "image",
   small: false,
+  footerEvent: false,
 };
 
 export default EventCard;
