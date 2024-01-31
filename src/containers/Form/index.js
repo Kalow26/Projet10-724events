@@ -1,8 +1,8 @@
-import { useCallback, useState } from "react";
 import PropTypes from "prop-types";
+import { useCallback, useState } from "react";
+import Button, { BUTTON_TYPES } from "../../components/Button";
 import Field, { FIELD_TYPES } from "../../components/Field";
 import Select from "../../components/Select";
-import Button, { BUTTON_TYPES } from "../../components/Button";
 
 const mockContactApi = () =>
   new Promise((resolve) => {
@@ -19,6 +19,7 @@ const Form = ({ onSuccess, onError }) => {
       try {
         await mockContactApi();
         setSending(false);
+        // ajout de la variable onSuccess a true pour l'affichage du message de confirmation
         onSuccess(true);
       } catch (err) {
         setSending(false);

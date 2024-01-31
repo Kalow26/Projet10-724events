@@ -1,11 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import Home from "./index";
-import EventList from "../../containers/Events";
-import EventCard from "../../components/EventCard";
-import { api, DataProvider } from "../../contexts/DataContext";
 import { events } from "../../../public/events.json";
-import { getMonth } from "../../helpers/Date";
-import Page from "./index";
+import EventCard from "../../components/EventCard";
+import EventList from "../../containers/Events";
+import Home from "./index";
 
 describe("When Form is created", () => {
   it("a list of fields card is displayed", async () => {
@@ -35,8 +32,8 @@ describe("When Form is created", () => {
 describe("When a page is created", () => {
   it("a list of events is displayed", () => {
     render(<EventList />);
-    const events = screen.getByTestId("events");
-    expect(events).toBeInTheDocument();
+    const allEvents = screen.getByTestId("events");
+    expect(allEvents).toBeInTheDocument();
   });
 
   it("a list a people is displayed", () => {
@@ -66,10 +63,5 @@ describe("When a page is created", () => {
     render(<EventCard {...mockData} />);
     const footerEventCard = screen.getByTestId("footer-event");
     expect(footerEventCard).toBeInTheDocument();
-    // console.log(footerEventCard);
-    // const dateElement = screen
-    //   .getByTestId("footer-testid")
-    //   .querySelector(".EventCard__month");
-    // expect(dateElement).toHaveTextContent("août");
   });
 });
